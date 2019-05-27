@@ -10,7 +10,7 @@
               </v-btn>
             </v-list-tile-action>
             <v-list-tile-action>
-              <v-btn icon ripple @click="() => del(appointment.id)">
+              <v-btn icon ripple @click="() => emitDelete(id)">
                 <v-icon color="grey lighten-1">delete</v-icon>
               </v-btn>
             </v-list-tile-action>
@@ -23,13 +23,11 @@ import {Appointment} from '../models/appointment';
 
 @Component({})
 export default class ListItem extends Vue {
-   @Prop() private appointment: any;
-    private del(id: string) {
-        this.emitDelete(id);
-  }
+  @Prop() private appointment: any;
+  @Emit('delete') private emitDelete(id: string) {}
+
   private redirect(id: string) {
     this.$router.push('/list-details/' + id);
   }
-  @Emit('delete') private emitDelete(id: string) {}
 }
 </script>
